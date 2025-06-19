@@ -1,4 +1,4 @@
-// === components/auth/ResetPasswordForm.tsx ===
+// 📁 src/components/auth/ResetPasswordForm.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -14,7 +14,7 @@ export default function ResetPasswordForm() {
   const router = useRouter();
 
   const [password, setPassword] = useState('');
-  const [confirm, setConfirm] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
@@ -32,7 +32,7 @@ export default function ResetPasswordForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password !== confirm) return setError('Passwords do not match');
+    if (password !== confirmPassword) return setError('Passwords do not match');
     setLoading(true);
     setError('');
     try {
@@ -47,31 +47,35 @@ export default function ResetPasswordForm() {
   };
 
   return (
-    <Card className="max-w-md mx-auto mt-10">
-      <CardContent className="p-6">
-        <h2 className="text-xl font-semibold mb-4">Reset your password</h2>
-        {message && <p className="text-green-600 mb-4">{message}</p>}
-        {error && <p className="text-red-600 mb-4">{error}</p>}
+    <Card className="w-full max-w-lg shadow-soft border rounded-2xl">
+      <CardContent className="p-8">
+        <h2 className="text-2xl font-display font-bold mb-6 text-indigo-800">
+          Reset your <span className="text-brand-600">Password</span>
+        </h2>
+        {message && <p className="text-green-600 mb-4 text-sm">{message}</p>}
+        {error && <p className="text-red-600 mb-4 text-sm">{error}</p>}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <Label htmlFor="password">New Password</Label>
+            <Label htmlFor="password" className="text-sm font-medium">New Password</Label>
             <Input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              className="mt-1"
             />
           </div>
           <div>
-            <Label htmlFor="confirm">Confirm Password</Label>
+            <Label htmlFor="confirm-password" className="text-sm font-medium">Confirm Password</Label>
             <Input
               type="password"
-              id="confirm"
-              value={confirm}
-              onChange={(e) => setConfirm(e.target.value)}
+              id="confirm-password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               required
+              className="mt-1"
             />
           </div>
           <Button type="submit" disabled={loading} className="w-full">

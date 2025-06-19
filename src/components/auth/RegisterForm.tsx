@@ -1,7 +1,8 @@
-// === components/auth/RegisterForm.tsx ===
+// 📁 src/components/auth/RegisterForm.tsx
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import axios from '@/lib/axios';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -9,51 +10,71 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 
 export default function RegisterForm() {
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setError('');
+    setLoading(true);
     try {
-      const res = await axios.post('/api/auth/register', form);
-      setMessage(res.data.message);
+      await axios.post('/api/auth/register', { name, email, password });
+      router.push('/login');
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Something went wrong');
+      setError(err.response?.data?.error || 'Registration failed');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Card className="max-w-md mx-auto mt-10">
-      <CardContent className="p-6">
-        <h2 className="text-xl font-semibold mb-4">Create your PrepBuddy account</h2>
-        {message && <p className="text-green-600 mb-4">{message}</p>}
-        {error && <p className="text-red-600 mb-4">{error}</p>}
+    <Card className="w-full max-w-lg shadow-soft border rounded-2xl">
+      <CardContent className="p-8">
+        <h2 className="text-2xl font-display font-bold mb-6 text-indigo-800">
+          Create your <span className="text-brand-600">PrepBuddy</span> account
+        </h2>
+        {error && <p className="text-red-600 mb-4 text-sm">{error}</p>}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <Label htmlFor="name">Name</Label>
-            <Input type="text" id="name" name="name" value={form.name} onChange={handleChange} required />
+            <Label htmlFor="name" className="text-sm font-medium">Name</Label>
+            <Input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="mt-1"
+            />
           </div>
           <div>
-            <Label htmlFor="email">Email</Label>
-            <Input type="email" id="email" name="email" value={form.email} onChange={handleChange} required />
+            <Label htmlFor="email" className="text-sm font-medium">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="mt-1"
+            />
           </div>
           <div>
-            <Label htmlFor="password">Password</Label>
-            <Input type="password" id="password" name="password" value={form.password} onChange={handleChange} required />
+            <Label htmlFor="password" className="text-sm font-medium">Password</Label>
+            <Input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="mt-1"
+            />
           </div>
           <Button type="submit" disabled={loading} className="w-full">
-            {loading ? 'Creating...' : 'Create Account'}
+            {loading ? 'Creating...' : 'Sign Up'}
           </Button>
         </form>
       </CardContent>

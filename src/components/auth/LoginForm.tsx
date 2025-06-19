@@ -29,29 +29,33 @@ export default function LoginForm() {
   };
 
   return (
-    <Card className="max-w-md mx-auto mt-10">
-      <CardContent className="p-6">
-        <h2 className="text-xl font-semibold mb-4">Log in to PrepBuddy</h2>
-        {error && <p className="text-red-600 mb-4">{error}</p>}
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <Card className="w-full max-w-lg shadow-soft border rounded-2xl">
+      <CardContent className="p-8">
+        <h2 className="text-2xl font-display font-bold mb-6 text-indigo-800">
+          Log in to <span className="text-brand-600">PrepBuddy</span>
+        </h2>
+        {error && <p className="text-red-600 mb-4 text-sm">{error}</p>}
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-sm font-medium">Email</Label>
             <Input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              className="mt-1"
             />
           </div>
           <div>
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password" className="text-sm font-medium">Password</Label>
             <Input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              className="mt-1"
             />
           </div>
           <Button type="submit" disabled={loading} className="w-full">

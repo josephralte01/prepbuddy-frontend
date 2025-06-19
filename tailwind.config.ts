@@ -1,25 +1,37 @@
-// tailwind.config.ts
-import type { Config } from 'tailwindcss'
+// 📁 tailwind.config.ts
+import type { Config } from 'tailwindcss';
+import { slate, indigo, amber, green } from 'tailwindcss/colors';
 
 const config: Config = {
   content: [
-    './src/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}'
   ],
   theme: {
     extend: {
       colors: {
-        prep: {
-          primary: '#0077E6',
-          secondary: '#5BB5FF',
-          accent: '#F5A623',
-          dark: '#123B63',
-          light: '#F8F9FC'
-        }
+        brand: indigo,
+        accent: amber,
+        success: green,
+        background: slate[50],
+        foreground: slate[900],
+      },
+      borderRadius: {
+        xl: '1rem',
+        '2xl': '1.5rem',
+      },
+      fontFamily: {
+        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+        display: ['Clash Display', 'ui-serif', 'Georgia'],
+      },
+      boxShadow: {
+        soft: '0 4px 14px rgba(0,0,0,0.05)',
       }
-    }
+    },
   },
-  plugins: []
-}
+  plugins: [require('tailwindcss-animate')],
+};
 
-export default config
+export default config;
