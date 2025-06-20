@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === Global styles === */
+
+html {
+  @apply scroll-smooth transition-colors duration-300;
+}
+
+/* === Dark Mode Support === */
+html.dark {
+  background-color: #0f172a; /* slate-900 */
+  color: #f8fafc;             /* slate-100 */
+}
+
+/* Optional: Link transition */
+a {
+  @apply transition-colors duration-200;
+}

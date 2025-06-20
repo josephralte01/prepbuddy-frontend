@@ -1,13 +1,14 @@
-// 📁 tailwind.config.ts
+// 📁 frontend/tailwind.config.ts
 import type { Config } from 'tailwindcss';
 import { slate, indigo, amber, green } from 'tailwindcss/colors';
 
 const config: Config = {
+  darkMode: 'class', // ✅ Enable dark mode using class strategy
   content: [
     './app/**/*.{ts,tsx}',
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}'
+    './src/**/*.{ts,tsx}',
   ],
   theme: {
     extend: {
@@ -28,7 +29,7 @@ const config: Config = {
       },
       boxShadow: {
         soft: '0 4px 14px rgba(0,0,0,0.05)',
-      }
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],
