@@ -2,12 +2,18 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import Head from 'next/head';
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-white">
-      {/* Hero Section */}
-      <section className="pt-28 pb-20 px-4 text-center relative">
+    <>
+      <Head>
+        <title>PrepBuddy - Your Gateway to Competitive Exam Success</title>
+        <meta name="description" content="Prepare smartly with AI-powered guidance, mock tests, and gamified learning. Join thousands of aspirants today on PrepBuddy." />
+      </Head>
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-white">
+        {/* Hero Section */}
+        <section className="pt-28 pb-20 px-4 text-center relative">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -54,5 +60,6 @@ export default function HomePage() {
         </div>
       </section>
     </div>
+    </>
   );
 }

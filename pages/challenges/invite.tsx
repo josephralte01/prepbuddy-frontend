@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { api } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import Head from 'next/head';
 
 export default function WebChallengeInvitePage() {
   const [username, setUsername] = useState('');
@@ -25,10 +26,15 @@ export default function WebChallengeInvitePage() {
   };
 
   return (
-    <div className="max-w-xl mx-auto py-10 px-4">
-      <h1 className="text-2xl font-bold mb-4">🔥 Send a Duel Challenge</h1>
+    <>
+      <Head>
+        <title>Send Challenge Invite - PrepBuddy</title>
+        <meta name="description" content="Send a duel challenge to another user on PrepBuddy." />
+      </Head>
+      <div className="max-w-xl mx-auto py-10 px-4">
+        <h1 className="text-2xl font-bold mb-4">🔥 Send a Duel Challenge</h1>
 
-      <Input
+        <Input
         placeholder="Opponent username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
@@ -57,5 +63,6 @@ export default function WebChallengeInvitePage() {
         <p>⏳ All participants must accept to begin the duel.</p>
       </div>
     </div>
+    </>
   );
 }

@@ -6,6 +6,7 @@ import { getHabitBadges } from '@/lib/getHabitBadges';
 import toast from 'react-hot-toast';
 import { useEffect, useRef, useState } from 'react';
 import api from '@/lib/api';
+import Head from 'next/head';
 
 export default function WebProfilePage() {
   const { user, mutate } = useUser();
@@ -57,11 +58,16 @@ export default function WebProfilePage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto py-10 px-6">
-      <h1 className="text-3xl font-bold text-center mb-2">{user?.name}</h1>
-      <p className="text-center text-muted-foreground mb-4">{user?.email}</p>
+    <>
+      <Head>
+        <title>{user?.name ? `${user.name}'s Profile` : 'User Profile'} - PrepBuddy</title>
+        <meta name="description" content={`View and manage your PrepBuddy profile. Track your progress, badges, and streaks.`} />
+      </Head>
+      <div className="max-w-2xl mx-auto py-10 px-6">
+        <h1 className="text-3xl font-bold text-center mb-2">{user?.name}</h1>
+        <p className="text-center text-muted-foreground mb-4">{user?.email}</p>
 
-      <div className="bg-white dark:bg-gray-900 rounded-xl shadow p-6 mb-6">
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow p-6 mb-6">
         <h2 className="text-xl font-semibold text-center">🏅 Level {level}</h2>
         {user?.rank && (
           <p className="text-center text-sm text-blue-600 dark:text-blue-400 mt-1">
@@ -124,5 +130,6 @@ export default function WebProfilePage() {
         </Link>
       </div>
     </div>
+    </>
   );
 }

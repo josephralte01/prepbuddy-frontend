@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useUser } from '@/lib/useUser';
 import { api } from '@/lib/api';
+import Head from 'next/head';
 
 type XPLog = {
   _id: string;
@@ -22,10 +23,15 @@ export default function XPHistoryPage() {
   const totalXP = logs.reduce((sum, log) => sum + (log.xpEarned || 0), 0);
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white shadow rounded-lg mt-8">
-      <h1 className="text-2xl font-bold text-center mb-4">📜 XP History</h1>
+    <>
+      <Head>
+        <title>XP History - PrepBuddy</title>
+        <meta name="description" content="View your XP earning history on PrepBuddy." />
+      </Head>
+      <div className="max-w-2xl mx-auto p-6 bg-white shadow rounded-lg mt-8">
+        <h1 className="text-2xl font-bold text-center mb-4">📜 XP History</h1>
 
-      <div className="mb-6 text-center">
+        <div className="mb-6 text-center">
         <p className="text-lg font-semibold">💪 Total XP Earned</p>
         <p className="text-2xl text-blue-600 font-bold">{totalXP}</p>
       </div>
@@ -44,5 +50,6 @@ export default function XPHistoryPage() {
         </ul>
       )}
     </div>
+    </>
   );
 }
